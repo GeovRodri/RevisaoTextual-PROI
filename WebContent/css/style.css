@@ -503,6 +503,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 .section-header {
   margin-bottom: 30px;
+  margin-top: 3rem;
 }
 
 .section-header h2 {
