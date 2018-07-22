@@ -11,7 +11,7 @@ import org.apache.tika.sax.BodyContentHandler;
 
 import org.xml.sax.SAXException;
 
-public class PdfParse {
+public class PdfParser {
 
    public static void main(final String[] args) throws IOException,TikaException, SAXException {
 
