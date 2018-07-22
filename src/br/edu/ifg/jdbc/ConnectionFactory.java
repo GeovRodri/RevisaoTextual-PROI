@@ -10,9 +10,9 @@ public class ConnectionFactory {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			String url = "jdbc:mysql://localhost:3306/ecommerce?useTimezone=true&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/revisao-textual?useTimezone=true&serverTimezone=UTC";
 			String user = "root";
-			String passw = "aluno";
+			String passw = "";
 			return DriverManager.getConnection(url, user, passw);
 		} catch (SQLException | ClassNotFoundException e) {
 			throw new RuntimeException(e);

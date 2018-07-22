@@ -27,6 +27,7 @@
 	<link href="<%=request.getContextPath()%>/lib/magnific-popup/magnific-popup.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
+	<script src="<%=request.getContextPath()%>/lib/jquery/jquery.min.js"></script>
 </head>
 
 <body id="body">
