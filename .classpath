@@ -15,12 +15,10 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
+
 	<classpathentry kind="lib" path="C:/Users/raula/Downloads/tika-app-1.18.jar"/>
 	<classpathentry kind="lib" path="C:/Users/raula/Downloads/tika-eval-1.18.jar"/>
 	<classpathentry kind="lib" path="C:/Users/raula/Downloads/tika-server-1.18.jar"/>
-=======
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
->>>>>>> df3fe00b06420c4dbb8ec45d64eeff5dfcf57993
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
