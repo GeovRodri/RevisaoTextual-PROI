@@ -9,7 +9,6 @@
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
 <!-- JavaScript Libraries -->
-<script src="<%=request.getContextPath()%>/lib/jquery/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/lib/jquery/jquery-migrate.min.js"></script>
 <script src="<%=request.getContextPath()%>/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/lib/easing/easing.min.js"></script>
