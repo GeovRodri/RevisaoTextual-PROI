@@ -15,7 +15,7 @@
    <description>Location to store uploaded file</description> 
    <param-name>file-upload</param-name> 
    <param-value>
-      C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app
+      C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app\\testepdf.pdf
    </param-value> 
 </context-param>
   

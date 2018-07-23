@@ -46,28 +46,14 @@ import javax.servlet.http.HttpServletResponse;
 public class OrcamentoServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		
-		 BodyContentHandler handler = new BodyContentHandler();
-	      Metadata metadata = new Metadata();
-	      FileInputStream inputstream = new FileInputStream(new File("C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app"));
-	      ParseContext pcontext = new ParseContext();
-		
-	    PDFParser pdfparser = new PDFParser(null);
-		
-		pdfparser.parse(); //(inputstream, handler, metadata,pcontext);
-		
-		 //getting the content of the document
-	      System.out.println("Contents of the PDF :" + handler.toString());
-	      
-	      //getting metadata of the document
-	      System.out.println("Metadata of the PDF:");
-	      String[] metadataNames = metadata.names();
-	      
-	      for(String name : metadataNames) {
-	         System.out.println(name+ " : " + metadata.get(name));
-	      }
+		PdfParser orcamento = new PdfParser();
+		try {
+			orcamento.executa("C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app\\testepdf.pdf");
+			
+		} catch (Exception e) {
+			System.out.println("Arquivo inválido");
+		}
 		
 	}
-	
 }

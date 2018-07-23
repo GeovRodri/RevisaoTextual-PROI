@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_trabalho_produto">GESTÃO DE PRODUTOS</string>
+    <string name="btn_toast">Exibir toast</string>
+    <string name="btn_salvar">SALVAR</string>
+    <string name="btn_excluir">EXCLUIR</string>
+    <string name="btn_voltar">VOLTAR</string>
+    <string name="btn_cadastrar">CADASTRAR</string>
+    <string name="btn_consultar">CONSULTAR</string>
+</resources>
