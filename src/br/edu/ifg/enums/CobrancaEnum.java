@@ -4,9 +4,9 @@ import java.util.EnumSet;
 
 public enum CobrancaEnum {
 	
-	POR_PAGINA("0", "Iremos cobrar pelo valor de páginas que o seu arquivo possui."),
-	POR_PALAVRA("1", "Iremos cobrar por cada palavra que o seu arquivo possui."),
-	POR_LAUDA("2", "Iremos realizar a cobrança por cada lauda do arquivo.");
+	POR_PAGINA("0", "Por pagina."),
+	POR_PALAVRA("1", "Por palavra."),
+	POR_LAUDA("2", "Por lauda.");
 	
 	private String id;
 	private String descricao;
