@@ -35,7 +35,33 @@
 	<section id="topbar" class="d-none d-lg-block">
 		<div class="container clearfix">
 			<div class="social-links float-right">
-				<a href="#">Login</a>
+				<c:choose>
+    				<c:when test="${userSession != null}">
+						${userSession.getNome()}
+					</c:when>
+     				<c:otherwise>
+						<button type="button" id="login-user" class="btn btn-link">Login</button>
+					</c:otherwise>
+  				</c:choose>
+				
+				<div id="login-form" style="display: none;">
+				
+				    <form class="form-signin" action="<%=request.getContextPath()%>/login" method="POST">
+				    	<div class="form-group">
+				    		<label>Email</label>
+				        	<input placeholder="Email" name="email" class="form-control" type="email">
+				      	</div>
+				      	
+				      	<div class="form-group">
+				      		<label>Senha</label>
+				      		<input placeholder="Senha" name="senha" class="form-control" type="password">
+				      	</div>
+				      	
+				      	<div class="form-group float-right">
+				        	<button type="submit" class="btn btn-primary" id="loginOrSignupButton">Login</button>
+				        </div>
+				    </form>
+				</div>
 			</div>
 		</div>
 	</section>

@@ -1,5 +1,13 @@
 jQuery(document).ready(function( $ ) {
 
+	// Inicializando popover de login
+	$('#login-user').popover({
+        placement: 'bottom',
+        title: '',
+        html:true,
+        content:  $('#login-form').html()
+    })
+
   // Back to top button
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {

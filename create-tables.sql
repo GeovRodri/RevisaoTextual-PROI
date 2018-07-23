@@ -16,6 +16,18 @@ CREATE TABLE servico_valor (
     foreign key(id_servico) references servico(id)
 );
 
+CREATE TABLE usuario (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	cpf VARCHAR(255) NOT NULL,
+	nome VARCHAR(255) NOT NULL,
+	senha VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	tipo VARCHAR(1) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+INSERT INTO `usuario` (`cpf`, `nome`, `senha`, `email`, `tipo`) VALUES ('000.000.000-00', 'Usuario', '123', 'usuario@gmail.com', '0');
+INSERT INTO `usuario` (`cpf`, `nome`, `senha`, `email`, `tipo`) VALUES ('000.000.000-00', 'Admin', '123', 'admin@gmail.com', '1');
 
 INSERT INTO `servico` (`descricao`, `caracteristicas`) VALUES ('Trabalho Academico', 'Trabalho em formato academico.');
 INSERT INTO `servico_valor` (`forma_pagamento`, `valor`, `id_servico`) VALUES ('0', 20.00, 1);
