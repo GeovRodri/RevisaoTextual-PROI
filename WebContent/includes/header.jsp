@@ -37,7 +37,16 @@
 			<div class="social-links float-right">
 				<c:choose>
     				<c:when test="${userSession != null}">
-						${userSession.getNome()}
+    					<div class="dropdown">
+						  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    ${userSession.getNome()}
+						  </a>
+						
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						    <a class="dropdown-item" href="<%=request.getContextPath()%>/area-resrtita/alterar-dados.jsp">Alterar dados</a>
+						    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Sair</a>
+						  </div>
+						</div>
 					</c:when>
      				<c:otherwise>
 						<button type="button" id="login-user" class="btn btn-link">Login</button>

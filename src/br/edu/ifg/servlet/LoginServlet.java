@@ -24,6 +24,9 @@ public class LoginServlet extends HttpServlet  {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
+		
+		// Setando retorno como utf8
+		response.setContentType("text/html;charset=UTF-8");
 
 		// pegando os parametros da requisição de login
 		String email = request.getParameter("email");
@@ -41,22 +44,22 @@ public class LoginServlet extends HttpServlet  {
 				session.setAttribute("userSession", usuario);
 				response.sendRedirect("area-restrita/area-cliente.jsp");
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher(request.getPathInfo());
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		        dispatcher.include(request, response);
 		        
 		        // colocando alert para exibir na tela
 		        out.print("<script>");
-		        out.print("		alert('Senha incorreta!')");
-		        out.print("<script/>");
+		        out.print("		alert('Senha incorreta!');");
+		        out.print("</script>");
 			}
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher(request.getPathInfo());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 	        dispatcher.include(request, response);
 	        
 	        // colocando alert para exibir na tela
 	        out.print("<script>");
-	        out.print("		alert('Usuario inexistente!')");
-	        out.print("<script/>");
+	        out.print("		alert('Usuario inexistente!');");
+	        out.print("</script>");
 		}
 		
 	}
