@@ -120,6 +120,19 @@
 							<li> <a href="<%=request.getContextPath()%>/contato.jsp">Contato</a> </li>
 						</c:otherwise>
    					</c:choose>
+   					
+   					<c:choose>
+      					<c:when test="${userSession != null}">
+		   					<c:choose>
+		      					<c:when test="${fn:containsIgnoreCase(pageContext.request.requestURI, 'area-cliente.jsp')}">
+									<li class="menu-active"> <a href="javascript:void(0)">Realizar Orçamento</a> </li>			
+								</c:when>
+		      					<c:otherwise>
+									<li> <a href="<%=request.getContextPath()%>/area-restrita/area-cliente.jsp">Realizar Orçamento</a> </li>
+								</c:otherwise>
+		   					</c:choose>
+	   					</c:when>
+   					</c:choose>
 				</ul>
 			</nav>
 		</div>

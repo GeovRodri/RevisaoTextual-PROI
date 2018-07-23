@@ -6,7 +6,14 @@
 	<div class="intro-content">
 		<h2>Faça sua revisão textual aqui!</h2>
 		<div>
-			<a href="#about" class="btn-get-started scrollto">Realizar agora</a>
+			<c:choose>
+   				<c:when test="${userSession != null}">
+   					<a href="area-restrita/area-cliente.jsp" class="btn-get-started scrollto">Realizar agora</a>
+				</c:when>
+    			<c:otherwise>
+					<a href="javascript:void(0)" onclick="openPopoverLogin()" class="btn-get-started scrollto">Realizar agora</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
