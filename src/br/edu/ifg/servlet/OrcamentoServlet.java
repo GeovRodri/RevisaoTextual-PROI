@@ -30,7 +30,6 @@ import java.io.IOException;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 
-import br.edu.ifg.util.FileBean;
 import br.edu.ifg.util.PdfParser;
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +48,7 @@ public class OrcamentoServlet extends HttpServlet {
 		
 		PdfParser orcamento = new PdfParser();
 		try {
-			orcamento.executa("C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app\\testepdf.pdf");
+			orcamento.executa(request, response);/*("C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app\\testepdf.pdf")*/;
 			
 		} catch (Exception e) {
 			System.out.println("Arquivo inválido");

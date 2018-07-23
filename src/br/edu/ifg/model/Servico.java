@@ -16,6 +16,10 @@ public class Servico {
 		this.descricao = descricao;
 		this.caracteristicas = caracteristicas;
 	}
+	
+	public Servico() {
+		super();
+	}
 
 	public Integer getId() {
 		return id;

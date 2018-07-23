@@ -4,12 +4,11 @@
 <section>
 
 
-  <form action ="OrcamentoServlet" method ="POST"
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" size = "50" />
-         <br />
-         <input type = "submit" value = "Upload File" />
-      </form>
+  		<form action="OrcamentoServlet" method="post" enctype="multipart/form-data">
+			<input type="text" name="texto">
+			<input type="file" name="file">
+			<input type="submit" value="Upload">
+		</form>
 
 </section>
 
