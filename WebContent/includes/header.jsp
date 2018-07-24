@@ -43,7 +43,7 @@
 						  </a>
 						
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						    <a class="dropdown-item" href="<%=request.getContextPath()%>/area-resrtita/alterar-dados.jsp">Alterar dados</a>
+						    <a class="dropdown-item" href="<%=request.getContextPath()%>/area-restrita/alterar-dados.jsp">Alterar dados</a>
 						    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Sair</a>
 						  </div>
 						</div>

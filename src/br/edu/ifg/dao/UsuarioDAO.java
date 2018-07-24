@@ -124,15 +124,29 @@ public class UsuarioDAO {
 	}
 	
 	public void alterar(Usuario usuario) {
-		String sql = "UPDATE usuario SET cpf = ?, nome = ?, email = ?, senha = ? WHERE id = ?";
+		String sql = "UPDATE usuario SET cpf = ?, nome = ?, email = ? WHERE id = ?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, usuario.getCpf());
 			stmt.setString(2, usuario.getNome());
 			stmt.setString(3, usuario.getEmail());
-			stmt.setString(4, usuario.getSenha());
-			stmt.setInt(5, usuario.getId());
+			stmt.setInt(4, usuario.getId());
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void alterarSenha(Usuario usuario) {
+		String sql = "UPDATE usuario SET senha = ? WHERE id = ?";
+		
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, usuario.getSenha());
+			stmt.setInt(2, usuario.getId());
 			
 			stmt.execute();
 			stmt.close();

@@ -14,6 +14,15 @@ public class Usuario {
 	public Usuario() {
 	}
 	
+	public Usuario(int id, String nome, String email, String cpf, String senha) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.cpf = cpf;
+		this.senha = senha;
+	}
+	
 	public Usuario(int id, String nome, String email, String tipo) {
 		super();
 		this.id = id;
