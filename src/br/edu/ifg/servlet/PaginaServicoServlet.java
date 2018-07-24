@@ -15,7 +15,7 @@ import br.edu.ifg.model.Servico;
 import br.edu.ifg.util.Utils;
 
 @WebServlet("/servico")
-public class ServicoServlet extends HttpServlet {
+public class PaginaServicoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 

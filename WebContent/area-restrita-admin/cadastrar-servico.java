@@ -16,14 +16,14 @@
           
           <div class="form-group col-md-6">
             <label>Descrição</label>
-            <input type="text" name="descricao" class="form-control" value=""
-              placeholder="Digite a descrição" required="required">
+            <textarea id ="descricao" name="descricao" class="form-control" value=""
+              placeholder="Digite a descrição" rows="3" cols="33" required="required">
           </div>
           
           <div class="form-group col-md-6">
             <label>Caracteristica</label>
-            <input type="text" class="form-control" name="características" value=""
-               placeholder="Digite as características" required="required">
+            <textarea id="caracteristica" name="caracteristica" class="form-control"  value=""
+               placeholder="Digite as características" rows="3" cols="33" required="required">
           </div>
         </div>
         
