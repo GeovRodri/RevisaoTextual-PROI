@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet  {
 		// pegando os parametros da requisição de login
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
+		String tipo = request.getParameter("tipo");
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
@@ -44,7 +45,15 @@ public class LoginServlet extends HttpServlet  {
 				session.setAttribute("userSession", usuario);
 				response.sendRedirect("area-restrita/area-cliente.jsp");
 			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+				RequestDispatcher dispatcher = null;
+				
+				// decidindo qual pagina será retornada de acordo com o tipo de login
+				if (tipo.isEmpty()) {
+					dispatcher = request.getRequestDispatcher("index.jsp");
+				} else {
+					dispatcher = request.getRequestDispatcher("admin.jsp");
+				}
+				
 		        dispatcher.include(request, response);
 		        
 		        // colocando alert para exibir na tela

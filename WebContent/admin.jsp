@@ -11,6 +11,8 @@
 			
 			<div class="col-sm-4">
 				<form class="form-signin" action="<%=request.getContextPath()%>/login" method="POST">
+					<input name="tipo" value="admin" style="display: none;">
+				
 					<div class="form-group">
 						<label>Email</label>
 						<input placeholder="Email" name="email" class="form-control" type="email">
