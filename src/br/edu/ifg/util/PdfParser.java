@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -21,28 +20,23 @@ import br.edu.ifg.model.ServicoValor;
 
 public class PdfParser {
 
-	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public void executa(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("text/html;charset=UTF-8");
 
-		final Part filePart = (Part) req.getPart("file");
-
-		InputStream pdfFileBytes = null;
-		final PrintWriter writer = res.getWriter();
-
 		try {
+			final Part filePart = (Part) req.getPart("file");
 
-			if (!((ServletRequest) filePart).getContentType().equals("application/pdf")) {
+			InputStream pdfFileBytes = null;
+			final PrintWriter writer = res.getWriter();
+
+			if (!filePart.getContentType().equals("application/pdf")) {
 				writer.println("<br/> Invalid File");
-				return null;
+				return;
 			} else { 
 				System.out.println("Erro");
 			}
 
 			pdfFileBytes = filePart.getInputStream();  // to get the body of the request as binary data
-
-			final byte[] bytes = new byte[pdfFileBytes.available()];
-			pdfFileBytes.read(bytes);
-
 
 			ParseContext pcontext = new ParseContext();
 			Metadata metadata = new Metadata();
@@ -50,10 +44,9 @@ public class PdfParser {
 
 			//parsing the document using PDF parser
 			PDFParser pdfparser = new PDFParser(); 
-			pdfparser.parse(pdfFileBytes, handler, metadata,pcontext);
-			String Caracteres = handler.toString();
-			String[] palavras = Caracteres.split(" ");
-
+			pdfparser.parse(pdfFileBytes, handler, metadata, pcontext);
+			String caracteres = handler.toString();
+			String[] palavras = caracteres.split(" ");
 
 			//getting the content of the document
 			System.out.println("Contents of the PDF :" + handler.toString());
@@ -80,12 +73,12 @@ public class PdfParser {
 					servic.setValor((Integer.valueOf(metadata.get("xmpTPg:NPages")) * servic.getValor()));
 				}
 				if (des.equalsIgnoreCase("lauda")) {
-					servic.setValor(((Caracteres.length() / 1250) * servic.getValor()));
-					System.out.println(Caracteres.length() / 1250 * servic.getValor());
+					servic.setValor(((caracteres.length() / 1250) * servic.getValor()));
+					System.out.println(caracteres.length() / 1250 * servic.getValor());
 				}
 				if (des.equalsIgnoreCase("caracter")) {
-					servic.setValor((Caracteres.length() * servic.getValor()));
-					System.out.println((Caracteres.length() * servic.getValor()));
+					servic.setValor((caracteres.length() * servic.getValor()));
+					System.out.println((caracteres.length() * servic.getValor()));
 				}
 				if (des.equalsIgnoreCase("palavra")) {
 					servic.setValor((palavras.length * servic.getValor()));
@@ -98,8 +91,7 @@ public class PdfParser {
 			req.getSession().setAttribute("srvSel", req.getParameter("servico"));
 			req.getSession().setAttribute("pgSel", req.getParameter("pagamento")); 
 			
-			// verificar o que irá ser retornado
-			return "orcamento.jsp";
+			res.sendRedirect("pagamento.jsp");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
