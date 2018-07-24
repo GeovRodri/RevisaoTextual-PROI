@@ -41,8 +41,9 @@
         </div>
         
         <div class="form-group float-right">
-          <button type="submit" class="btn btn-default" onclick="alterarServico()">Alterar</button>
-        </div>
+					<button class="btn btn-danger" onclick="removerServico()" type="button">Excluir Servico</button>
+					<button type="submit" class="btn btn-default">Salvar</button>
+				</div>
       </form>
     </div>
 
