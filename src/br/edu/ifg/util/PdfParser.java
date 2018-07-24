@@ -2,9 +2,12 @@ package br.edu.ifg.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +16,8 @@ import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.pdf.PDFParser;
 import org.apache.tika.sax.BodyContentHandler;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.Part;
+
 import br.edu.ifg.dao.ServicoDAO;
 import br.edu.ifg.model.Servico;
 import br.edu.ifg.model.ServicoValor;
@@ -20,15 +25,39 @@ import br.edu.ifg.model.ServicoValor;
 public class PdfParser {
 	
 	public String executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-		String url = "RevisaoTextual-PROI/area-restrita/orcamento.jsp";
-		
+		  /*String url = "RevisaoTextual-PROI/area-restrita/orcamento.jsp";
 		  String arquivos = "C:\\Users\\raula\\Documents\\RevisaoTextual-PROI\\WebContent\\web-app\\testepdf.pdf";
-	
-	      BodyContentHandler handler = new BodyContentHandler();
-	      Metadata metadata = new Metadata();
-	      FileInputStream inputstream = new FileInputStream(new File(arquivos));
+	      FileInputStream inputstream = new FileInputStream(new File(arquivos));*/
+	     
+	    String pathDoc = System.getProperty("user.home"); 
+		res.setContentType("text/html;charset=UTF-8");
+		 
+        final Part filePart = (Part) req.getPart("file");
+        String bookId = req.getParameter("bookId");
+ 
+        InputStream pdfFileBytes = null;
+        final PrintWriter writer = res.getWriter();
+ 
+        try {
+ 
+          if (!((ServletRequest) filePart).getContentType().equals("application/pdf"))
+            {
+                       writer.println("<br/> Invalid File");
+                       return null;
+            }
+           else { 
+               System.out.println("Erro");
+           }
+       
+          pdfFileBytes = filePart.getInputStream();  // to get the body of the request as binary data
+          
+          final byte[] bytes = new byte[pdfFileBytes.available()];
+           pdfFileBytes.read(bytes);
+            
+            
 	      ParseContext pcontext = new ParseContext();
+	      Metadata metadata = new Metadata();
+	      BodyContentHandler handler = new BodyContentHandler();
 	      
 	      //parsing the document using PDF parser
 	      PDFParser pdfparser = new PDFParser(); 
