@@ -74,6 +74,5 @@ public class UsuarioServlet extends HttpServlet {
 		
 		// limpando a sessão e redirecionando para o index
 		session.setAttribute("userSession", null);
-		response.sendRedirect("area-restrita/area-cliente.jsp");
 	}
 }

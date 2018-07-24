@@ -46,6 +46,7 @@
 				</div>
 				
 				<div class="form-group float-right">
+					<button class="btn btn-danger" onclick="removerUsuario()" type="button">Excluir Conta</button>
 					<button type="submit" class="btn btn-default">Salvar</button>
 				</div>
 			</form>

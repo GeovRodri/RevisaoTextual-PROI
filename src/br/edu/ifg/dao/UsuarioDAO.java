@@ -156,7 +156,7 @@ public class UsuarioDAO {
 	}
 	
 	public void excluirUsuario(Integer id) {
-		String sql = "DELETE usuario WHERE id = ?";
+		String sql = "DELETE FROM usuario WHERE id = ?";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);

@@ -159,3 +159,14 @@ jQuery(document).ready(function( $ ) {
 function openPopoverLogin() {
 	$('#login-user').popover('show');
 }
+
+function removerUsuario() {
+	$.ajax({
+	    url: 'usuario',
+	    type: 'DELETE',
+	    success: function(result) {
+	        alert('Usuario removido com sucesso!');
+	        location.href = 'index.jsp';
+	    }
+	});
+}
