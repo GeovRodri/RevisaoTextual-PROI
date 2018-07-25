@@ -136,4 +136,18 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	public void salvarServico(Servico servico){
+	String sql = "INSERT INTO servico (descricao, caracteristicas) values (?,?)";
+
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, servico.getDescricao());
+			stmt.setString(2, servico.getCaracteristicas());
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+}
 }
