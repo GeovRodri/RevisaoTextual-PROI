@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ifg.enums.TipoUsuarioEnum;
 import br.edu.ifg.jdbc.ConnectionFactory;
 import br.edu.ifg.model.Servico;
 import br.edu.ifg.model.ServicoValor;
-import br.edu.ifg.model.Usuario;
 
 public class ServicoDAO {
 	

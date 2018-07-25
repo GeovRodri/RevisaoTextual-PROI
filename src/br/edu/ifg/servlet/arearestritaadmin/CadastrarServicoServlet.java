@@ -1,7 +1,9 @@
-package br.edu.ifg.servlet;
+package br.edu.ifg.servlet.arearestritaadmin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,17 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.sis.internal.converter.StringConverter.Integer;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
 
 import br.edu.ifg.dao.ServicoDAO;
 import br.edu.ifg.model.Servico;
+import br.edu.ifg.model.ServicoValor;
 
 @WebServlet("/area-restrita-admin/cadastrar-servico")
-public class AdmServlet extends HttpServlet {
+public class CadastrarServicoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -27,31 +25,37 @@ public class AdmServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ServicoDAO servicoDAO = new ServicoDAO();
-		
+		PrintWriter out = response.getWriter();
 		
 		// pegando os parametros do formulario
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		String descricao = request.getParameter("descricao");
 		String caracteristicas = request.getParameter("caracteristica");
-		Double vPagina = request.getParameter("valorpagina");	
-		Double vLauda = request.getParameter("valorlauda");	
-		Double vPalavra = request.getParameter("valorpalavra");	
-		List<ServicoValores> lista = ArrayList();
+		Double vPagina =Double.valueOf(request.getParameter("valorpagina"));	
+		Double vLauda = Double.valueOf(request.getParameter("valorlauda"));	
+		Double vPalavra = Double.valueOf(request.getParameter("valorpalavra"));	
 		
-		lista.add = (ServicoValores pagina = new ServicoValores(id,id,0,vPagina));
-		lista.add = (ServicoValores palavra = new ServicoValores(id,id,1,vPalavra));
-		lista.add = (ServicoValores lauda = new ServicoValores(id,id,2,vLauda));
+		List<ServicoValor> lista = new ArrayList(); 
+		
+		ServicoValor pagina = new ServicoValor();
+		ServicoValor palavra = new ServicoValor();
+		ServicoValor lauda = new ServicoValor();
+		lista.add(pagina); 
+		lista.add(palavra);
+		lista.add(lauda);
 
 		if () {
-		
-			Servico servico = new Servico(descricao, caracteristicas, lista);
-			servicoDAO.cadastrarServico(servico);
+		//Cadastrando Servico
+			Servico servico = new Servico(id,descricao,caracteristicas);
+			servico.setServicoValores(lista);
+			servicoDAO.adicionaServico(servico);
 
 		}else{
 
 		// Alterando Servico
 
-			Servico servico = new Servico(id, descricao, caracteristicas,lista);
+			Servico servico = new Servico(id,descricao,caracteristicas);
+			servico.setServicoValores(lista);
 			servicoDAO.alterarServico(servico);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-servico.jsp");
