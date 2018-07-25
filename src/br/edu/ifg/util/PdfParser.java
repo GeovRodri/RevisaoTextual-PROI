@@ -39,6 +39,8 @@ public class PdfParser {
 	public void executa(HttpServletRequest req, HttpServletResponse res) {
 		HttpSession session = req.getSession();
 		res.setContentType("text/html;charset=UTF-8");
+		
+		Integer servicoId = Integer.valueOf(req.getParameter("servicoId"));
 
 		try {
 			final Part filePart = (Part) req.getPart("file"); //Pegando o arquivo que foi feito upload atraves da pag area-cliente.jsp
@@ -82,8 +84,8 @@ public class PdfParser {
 				System.out.println(name+ " : " + metadata.get(name));
 			}
 			
-			ServicoDAO servicoDAO = new ServicoDAO();//Instanciando objeto DAO para buscar as informa�oes do servi�o
-			Servico servico = servicoDAO.getServico(1);// buscando o servico de acordo com o id selecionado na tela;
+			ServicoDAO servicoDAO = new ServicoDAO(); //Instanciando objeto DAO para buscar as informa�oes do servi�o
+			Servico servico = servicoDAO.getServico(servicoId); // buscando o servico de acordo com o id selecionado na tela;
 
 			for (ServicoValor servicoValor : servico.getServicoValores()) {
 				

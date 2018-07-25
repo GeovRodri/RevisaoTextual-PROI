@@ -2,6 +2,7 @@ package br.edu.ifg.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.edu.ifg.dao.ServicoDAO;
 import br.edu.ifg.dao.UsuarioDAO;
 import br.edu.ifg.enums.TipoUsuarioEnum;
+import br.edu.ifg.model.Servico;
 import br.edu.ifg.model.Usuario;
 
 
@@ -54,6 +57,11 @@ public class LoginServlet extends HttpServlet  {
 				        out.print("</script>");
 					}
 				}
+				
+				// buscando a lista de servicos para setar na sessão do usuario. Vai ser utilizado na hora de realizar o orçamento
+				ServicoDAO servicoDAO = new ServicoDAO();
+				List<Servico> servicos = servicoDAO.getAll();
+				session.setAttribute("servicos", servicos);
 				
 				session.setAttribute("userSession", usuario);
 				response.sendRedirect("area-restrita/area-cliente.jsp");

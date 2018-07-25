@@ -15,7 +15,9 @@
 						<label>Serviço</label>
 						<select name="servicoId" class="form-control" required>
 							<option value="">Selecione um serviço </option>
-							<option value="1">1</option>
+							<c:forEach var="sevicoItem" items="${servicos}" varStatus="id">
+								<option value="${sevicoItem.id}">${sevicoItem.descricao}</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -25,7 +27,9 @@
 						<label>Forma de cobrança</label>
 						<select name="cobranca" class="form-control" required>
 							<option value="">Selecione um forma de cobrança </option>
-							<option value="0">1</option>
+							<option value="0">Por pagina</option>
+							<option value="1">Por lauda</option>
+							<option value="2">Por palavra</option>
 						</select>
 					</div>
 				</div>
