@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifg.dao.ServicoDAO;
+import br.edu.ifg.dao.ServicoValorDAO;
 import br.edu.ifg.model.Servico;
 import br.edu.ifg.model.ServicoValor;
 
@@ -36,7 +37,7 @@ public class CadastrarServicoServlet extends HttpServlet {
 		Double vLauda = Double.valueOf(request.getParameter("valorlauda"));	
 		Double vPalavra = Double.valueOf(request.getParameter("valorpalavra"));	
 		
-		List<ServicoValor> lista = new ArrayList(); 
+		List<ServicoValor> lista = new ArrayList<ServicoValor>(); 
 		
 		if (request.getParameter("id").equals(null)) {
 		//Cadastrando Servico
@@ -46,11 +47,10 @@ public class CadastrarServicoServlet extends HttpServlet {
 			servico.setCaracteristicas(caracteristicas);
 			servicoDAO.salvarServico(servico);
 			
-			Integer i = servico.getId() 
 			
-			ServicoValor pagina = new ServicoValor(i,'0',vPagina);
-			ServicoValor palavra = new ServicoValor(i,'1',vLauda);
-			ServicoValor lauda = new ServicoValor(i,'2',vPalavra);
+			ServicoValor pagina = new ServicoValor(servico.getId(),"0",vPagina);
+			ServicoValor palavra = new ServicoValor(servico.getId(),"1",vLauda);
+			ServicoValor lauda = new ServicoValor(servico.getId(),"2",vPalavra);
 			
 			lista.add(pagina);
 			lista.add(palavra);
@@ -69,9 +69,9 @@ public class CadastrarServicoServlet extends HttpServlet {
 						
 			Servico servico = new Servico(id,descricao,caracteristicas);
 			
-			ServicoValor pagina = new ServicoValor(id,'0',vPagina);
-			ServicoValor palavra = new ServicoValor(id,'1',vLauda);
-			ServicoValor lauda = new ServicoValor(id,'2',vPalavra);
+			ServicoValor pagina = new ServicoValor(id,"0",vPagina);
+			ServicoValor palavra = new ServicoValor(id,"1",vLauda);
+			ServicoValor lauda = new ServicoValor(id,"2",vPalavra);
 			
 			lista.add(pagina); 
 			lista.add(palavra);
