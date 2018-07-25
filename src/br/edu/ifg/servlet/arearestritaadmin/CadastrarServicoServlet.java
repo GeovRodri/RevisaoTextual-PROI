@@ -25,6 +25,7 @@ public class CadastrarServicoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ServicoDAO servicoDAO = new ServicoDAO();
+		ServicoValorDAO servicoValorDAO = new ServicoValorDAO(); 
 		PrintWriter out = response.getWriter();
 		
 		// pegando os parametros do formulario
@@ -37,25 +38,41 @@ public class CadastrarServicoServlet extends HttpServlet {
 		
 		List<ServicoValor> lista = new ArrayList(); 
 		
-		ServicoValor pagina = new ServicoValor();
-		ServicoValor palavra = new ServicoValor();
-		ServicoValor lauda = new ServicoValor();
-		lista.add(pagina); 
-		lista.add(palavra);
-		lista.add(lauda);
-
-		if () {
+		if (request.getParameter("id").equals(null)) {
 		//Cadastrando Servico
-			Servico servico = new Servico(id,descricao,caracteristicas);
+			
+			Servico servico = new Servico(id,descricao,caracteristicas);			
+			
+			
+			ServicoValor pagina = new ServicoValor(id,servico.getId(),0,vPagina);
+			ServicoValor palavra = new ServicoValor(id,servico.getId(),1,vLauda);
+			ServicoValor lauda = new ServicoValor(id,servico.getId(),2,vPalavra);
+			lista.add(pagina);
+			lista.add(palavra);
+			lista.add(lauda);
+			
 			servico.setServicoValores(lista);
+			ServicoValorDAO.adicionaServicoValor(pagina);
+			ServicoValorDAO.adicionaServicoValor(palavra);
+			ServicoValorDAO.adicionaServicoValor(lauda);
 			servicoDAO.adicionaServico(servico);
 
 		}else{
 
 		// Alterando Servico
-
+			servicoValorDAO.removerValorServico(id);
+						
 			Servico servico = new Servico(id,descricao,caracteristicas);
-			servico.setServicoValores(lista);
+			
+			ServicoValor pagina = new ServicoValor(id,0,vPagina);
+			ServicoValor palavra = new ServicoValor(id,1,vLauda);
+			ServicoValor lauda = new ServicoValor(id,2,vPalavra);
+			
+			lista.add(pagina); 
+			lista.add(palavra);
+			lista.add(lauda);
+			servico.setServicoValores(lista);			
+			
 			servicoDAO.alterarServico(servico);
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-servico.jsp");
@@ -69,6 +86,6 @@ public class CadastrarServicoServlet extends HttpServlet {
 			out.print("$('#valorlauda').val(vLauda);");
 			out.print("$('#valorpalavra').val(vPalavra);");
 			out.print("</script>");
-		}		
+		}
 	}
 }
