@@ -49,6 +49,7 @@ public class PdfParser {
 			PDFParser pdfparser = new PDFParser(); 
 			pdfparser.parse(pdfFileBytes, handler, metadata, pcontext);
 			String caracteres = handler.toString();
+			caracteres = caracteres.replace("\n", "");
 			String[] palavras = caracteres.split(" ");
 
 			//getting the content of the document
@@ -69,10 +70,14 @@ public class PdfParser {
 			
 			for (ServicoValor servicoValor : servico.getServicoValores()) {
 				if (servicoValor.getFormaPagamento().compareTo(CobrancaEnum.POR_LAUDA) == 0) {
-					Double valor = (caracteres.length() / 1250) * servicoValor.getValor();
-					System.out.println(valor);
-					
-					session.setAttribute("valorPorLauda", valor);
+					Double valorLauda = null;
+					if(caracteres.length() < 1250) {
+						valorLauda = 1 * servicoValor.getValor();
+					} else {
+					valorLauda = (caracteres.length() / 1250) * servicoValor.getValor();
+					}
+					System.out.println(valorLauda);
+					session.setAttribute("valorPorLauda", valorLauda);
 				}
 				if (servicoValor.getFormaPagamento().compareTo(CobrancaEnum.POR_PAGINA) == 0) {
 					Double valor = (Integer.valueOf(metadata.get("xmpTPg:NPages")) * servicoValor.getValor());
