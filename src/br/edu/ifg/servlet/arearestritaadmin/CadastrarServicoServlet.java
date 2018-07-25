@@ -44,18 +44,21 @@ public class CadastrarServicoServlet extends HttpServlet {
 			Servico servico = new Servico();			
 			servido.setDescricao(descricao);
 			servico.setCaracteristicas(caracteristicas);
+			servicoDAO.adicionaServico(servico);
 			
-			ServicoValor pagina = new ServicoValor(id,servico.getId(),0,vPagina);
-			ServicoValor palavra = new ServicoValor(id,servico.getId(),1,vLauda);
-			ServicoValor lauda = new ServicoValor(id,servico.getId(),2,vPalavra);
+			
+			ServicoValor pagina = new ServicoValor(servico.getId(),0,vPagina);
+			ServicoValor palavra = new ServicoValor(servico.getId(),1,vLauda);
+			ServicoValor lauda = new ServicoValor(servico.getId(),2,vPalavra);
+			
 			lista.add(pagina);
 			lista.add(palavra);
 			lista.add(lauda);
-			
 			servico.setServicoValores(lista);
-			ServicoValorDAO.adicionaServicoValor(pagina);
-			ServicoValorDAO.adicionaServicoValor(palavra);
-			ServicoValorDAO.adicionaServicoValor(lauda);
+			
+			servicoValorDAO.adicionaServicoValor(pagina);
+			servicoValorDAO.adicionaServicoValor(palavra);
+			servicoValorDAO.adicionaServicoValor(lauda);
 			servicoDAO.adicionaServico(servico);
 
 		}else{
