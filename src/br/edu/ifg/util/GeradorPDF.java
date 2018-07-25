@@ -47,10 +47,18 @@ public class GeradorPDF extends HttpServlet{
 		
 		new GeradorPDF().exemplo();
 	}
+	
+	 
 
 	final void exemplo() throws IOException {
 
-		List<Boleto> boletos = crieBoletos(1);
+		List<Boleto> boletos = null;
+		try {
+			boletos = crieBoletos(null, null);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		String template = "MeuTemplate.pdf";
 		byte[] boletosInOnePDF = BoletoViewer.groupInOnePdfWithTemplate(boletos, new File(template));
@@ -65,7 +73,8 @@ public class GeradorPDF extends HttpServlet{
 		
 	}
 
-	List<Boleto> crieBoletos(int quantidade) {
+	public List<Boleto> crieBoletos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//HttpSession session = request.getSession();
 		
 		ContaBancaria contaBancaria = crieUmaContaBancaria();
 		
@@ -80,9 +89,9 @@ public class GeradorPDF extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		List<Boleto> boletos = new ArrayList<Boleto>(quantidade);
+		List<Boleto> boletos = new ArrayList<Boleto>(1);
 		
-		for (int numero = 1; numero <= quantidade; numero++) {
+		for (int numero = 1; numero <= 1; numero++) {
 		
 			Titulo titulo = crieOsDadosDoNovoTitulo(new Titulo(contaBancaria,sacado,cedente), numero);
 			Boleto boleto = crieOsDadosDoNovoBoleto(new Boleto(titulo));
