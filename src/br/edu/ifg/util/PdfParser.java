@@ -55,6 +55,9 @@ public class PdfParser {
 			}
 
 			pdfFileBytes = filePart.getInputStream();  // para obter o corpo da requisi��o em dados bin�rios
+			
+			// Criando backup do arquivo para criar o pdf
+			InputStream newPdfFileBytes = filePart.getInputStream();
 
 			ParseContext pcontext = new ParseContext();
 			Metadata metadata = new Metadata();
@@ -126,9 +129,11 @@ public class PdfParser {
 			// Salvando no arquivo
 			System.out.println(arquivoPdf.getAbsolutePath());
 			OutputStream outputStream = new FileOutputStream(arquivoPdf);
-		    IOUtils.copy(pdfFileBytes, outputStream);
+		    IOUtils.copy(newPdfFileBytes, outputStream);
+		    
 		    outputStream.close();
-			
+		    pdfFileBytes.close();
+		    newPdfFileBytes.close();
 			res.sendRedirect("orcamento.jsp");//redirecionando para a pagina de or�amento jaS com os valores calculados para cada servi�o
 		} catch (Exception e) {
 			throw new RuntimeException(e);
