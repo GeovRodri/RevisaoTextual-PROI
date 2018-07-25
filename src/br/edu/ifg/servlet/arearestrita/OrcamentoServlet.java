@@ -1,5 +1,8 @@
 package br.edu.ifg.servlet.arearestrita;
-
+/**
+ * Servlet que é chamada pelo formulario em area-cliente, que tem como proposito chamar o metodo da classe que interpreta o arquivo inserido no form e calcular o orçamento.
+ *
+ */
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -20,6 +23,6 @@ public class OrcamentoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PdfParser orcamento = new PdfParser();
-		orcamento.executa(request, response);
+		orcamento.executa(request, response); //chama o metodo executa, que ira fazer o calculo do orcamento para cada servico e retornar a pag que ira exibir os resultados.
 	}
 }
