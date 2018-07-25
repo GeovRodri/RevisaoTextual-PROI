@@ -41,8 +41,9 @@ public class CadastrarServicoServlet extends HttpServlet {
 		if (request.getParameter("id").equals(null)) {
 		//Cadastrando Servico
 			
-			Servico servico = new Servico(id,descricao,caracteristicas);			
-			
+			Servico servico = new Servico();			
+			servido.setDescricao(descricao);
+			servico.setCaracteristicas(caracteristicas);
 			
 			ServicoValor pagina = new ServicoValor(id,servico.getId(),0,vPagina);
 			ServicoValor palavra = new ServicoValor(id,servico.getId(),1,vLauda);
