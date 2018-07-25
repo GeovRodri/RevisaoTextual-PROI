@@ -12,7 +12,7 @@ public class ServicoValor {
 	
 	public ServicoValor(Integer id, String formaPagamento, Double valor) {
 		super();
-		this.id = id;
+		this.idServico = id;
 		this.formaPagamento = CobrancaEnum.lookup(formaPagamento);
 		this.valor = valor;
 	}
