@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 
 import org.jrimum.bopepo.BancosSuportados;
@@ -26,9 +33,17 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
 
 
-public class GeradorPDF {
+import br.edu.ifg.model.Usuario;
+
+public class GeradorPDF extends HttpServlet{
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static void main(String[] args) throws IOException {
+		
 		
 		new GeradorPDF().exemplo();
 	}
@@ -56,7 +71,14 @@ public class GeradorPDF {
 		
 		Cedente cedente = crieUmCedente(); 
 		
-		Sacado sacado = crieUmSacado();
+		Sacado sacado = null;
+		try {
+			sacado = crieUmSacado(null, null);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		List<Boleto> boletos = new ArrayList<Boleto>(quantidade);
 		
@@ -77,9 +99,11 @@ public class GeradorPDF {
 		
 		return boleto;
 	}
+	
+	
 	final Titulo crieOsDadosDoNovoTitulo(Titulo titulo, int numero) {
-		titulo.setNumeroDoDocumento(""+numero);
-		titulo.setNossoNumero(String.format("%011d", numero));
+		titulo.setNumeroDoDocumento("123456"+numero);
+		titulo.setNossoNumero(String.format("99345678912", numero));
 		titulo.setDigitoDoNossoNumero("5");
 		titulo.setValor(BigDecimal.valueOf(10 + numero));
 		titulo.setDataDoDocumento(new Date());
@@ -90,18 +114,23 @@ public class GeradorPDF {
 		titulo.setAceite(Aceite.A);
 		return titulo;
 	}
-	final Sacado crieUmSacado() {
+	
+	
+	final Sacado crieUmSacado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Sacado sacado = new Sacado("Nome do sacado", "222.222.222-22");
+		HttpSession session = request.getSession();
+		Usuario usuario = (Usuario) session.getAttribute("userSession");
+		
+		Sacado sacado = new Sacado(usuario.getNome(), usuario.getCpf());
 
 		// Informe o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
 		enderecoSac.setUF(UnidadeFederativa.GO);
-		enderecoSac.setLocalidade("");
-		enderecoSac.setCep(new CEP(""));
-		enderecoSac.setBairro("");
-		enderecoSac.setLogradouro("");
-		enderecoSac.setNumero("1");
+		enderecoSac.setLocalidade(usuario.getLocalidade());
+		enderecoSac.setCep(new CEP(usuario.getCep()));
+		enderecoSac.setBairro(usuario.getBairro());
+		enderecoSac.setLogradouro(usuario.getLogradouro());
+		enderecoSac.setNumero(usuario.getNumero());
 		sacado.addEndereco(enderecoSac);
 		
 		return sacado;
@@ -109,7 +138,7 @@ public class GeradorPDF {
 	
 	final Cedente crieUmCedente() {
 		
-		return new Cedente("LGPR Revisao Textual", "00.000.000/0000-00");
+		return new Cedente("LGPR Revisao Textual", "00.000.208/0001-00");
 	}
 	
 	final ContaBancaria crieUmaContaBancaria(){

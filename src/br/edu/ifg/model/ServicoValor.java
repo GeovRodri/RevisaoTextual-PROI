@@ -6,6 +6,7 @@ public class ServicoValor {
 	
 	private Integer id;
 	private Integer idServico;
+	private String nomeServico;
 	private CobrancaEnum formaPagamento;
 	private Double valor;
 	
@@ -50,5 +51,13 @@ public class ServicoValor {
 
 	public void setIdServico(Integer idServico) {
 		this.idServico = idServico;
+	}
+
+	public String getNomeServico() {
+		return nomeServico;
+	}
+
+	public void setNomeServico(String nomeServico) {
+		this.nomeServico = nomeServico;
 	}
 }

@@ -8,38 +8,42 @@
 			<h2>Orçamento</h2>
 		</div>													
 	
-		<div class="col-sm-12">
-			<c:choose>
-				<c:when test="${valorPorPagina != null}">
-					<div class="form-check form-check-inline">
-					  	<input class="form-check-input" type="radio" name="cobranca" id="radioPorPagina" value="${valorPorPagina}">
-					  	<label class="form-check-label" for="radioPorPagina">Por pagina <fmt:formatNumber value="${valorPorPagina}" type="currency"/></label>
-					</div>
-				</c:when>
-			</c:choose>
-			<c:choose>
-		 		<c:when test="${valorPorLauda != null}">
-					<div class="form-check form-check-inline">
-					  	<input class="form-check-input" type="radio" name="cobranca" id="radioPorLauda" value="${valorPorLauda}">
-					  	<label class="form-check-label" for="radioPorLauda">Por lauda <fmt:formatNumber value="${valorPorLauda}" type="currency"/></label>
-					</div>
-				</c:when>
-			</c:choose>
+		<div class="form">
+
+			<form action="requisitar" method="post">
 				
-			<c:choose>	
-				<c:when test="${valorPorPalavra != null}">
-					<div class="form-check form-check-inline">
-					  	<input class="form-check-input" type="radio" name="cobranca" id="radioPorPalavra" value="${valorPorPalavra}">
-					  	<label class="form-check-label" for="radioPorPalavra">Por palavra <fmt:formatNumber value="${valorPorPalavra}" type="currency"/></label>
-					</div>
-				</c:when>
-			</c:choose>
-		</div>
-		
-		<div class="col-sm-12">
-			<div class="float-right">
-				<a type="button" class="btn btn-primary" href="pagamento.jsp">Requisitar Serviço</a>
-			</div>
+				<div class="form-row">	
+					<c:choose>
+						<c:when test="${valorPorPagina != null}">
+							<div class="form-check form-check-inline">
+							  	<input class="form-check-input" type="radio" name="valor" id="radioPorPagina" value="${valorPorPagina}" ${cobrancaSelecionada.equals("0") ? 'checked' : ''}>
+							  	<label class="form-check-label" for="radioPorPagina">Por pagina <fmt:formatNumber value="${valorPorPagina}" type="currency"/></label>
+							</div>
+						</c:when>
+					</c:choose>
+					<c:choose>
+				 		<c:when test="${valorPorLauda != null}">
+							<div class="form-check form-check-inline">
+							  	<input class="form-check-input" type="radio" name="valor" id="radioPorLauda" value="${valorPorLauda}" ${cobrancaSelecionada.equals("1") ? 'checked' : ''}>
+							  	<label class="form-check-label" for="radioPorLauda">Por lauda <fmt:formatNumber value="${valorPorLauda}" type="currency"/></label>
+							</div>
+						</c:when>
+					</c:choose>
+						
+					<c:choose>	
+						<c:when test="${valorPorPalavra != null}">
+							<div class="form-check form-check-inline">
+							  	<input class="form-check-input" type="radio" name="valor" id="radioPorPalavra" value="${valorPorPalavra}" ${cobrancaSelecionada.equals("2") ? 'checked' : ''}>
+							  	<label class="form-check-label" for="radioPorPalavra">Por palavra <fmt:formatNumber value="${valorPorPalavra}" type="currency"/></label>
+							</div>
+						</c:when>
+					</c:choose>
+				</div>
+				
+				<div class="float-right">
+					<button type="submit" class="btn btn-primary">Requisitar Serviço</button>
+				</div>
+			</form>
 		</div>
 	</div>
 	

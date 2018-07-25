@@ -19,6 +19,16 @@
 						</select>
 					</div>
 				</div>
+				
+				<div class="form-row">	
+					<div class="form-group col-md-4">
+						<label>Forma de cobrança</label>
+						<select name="cobranca" class="form-control" required>
+							<option value="">Selecione um forma de cobrança </option>
+							<option value="0">1</option>
+						</select>
+					</div>
+				</div>
 					
 				<div class="form-row">
 					<div class="form-group col-md-4">
