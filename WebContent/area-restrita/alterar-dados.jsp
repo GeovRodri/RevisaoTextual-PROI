@@ -31,7 +31,7 @@
 					<div class="form-group col-md-4">
 						<label>CPF</label>
 						<input type="text" class="form-control" name="cpf" value="${userSession.getCpf()}"
-							placeholder="Digite seu CPF" maxlength="14">
+							placeholder="Digite seu CPF" maxlength="14" required="required">
 					</div>
 					
 					<div class="form-group col-md-4">
@@ -50,43 +50,43 @@
 					<div class="form-group col-md-1">
 						<label>UF</label>
 						<input type="text" class="form-control" name="uf" value="${userSession.getUf()}"
-							placeholder="UF" maxlength="2">
+							placeholder="UF" maxlength="2" required="required">
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label>Localidade</label>
 						<input type="text" class="form-control" name="localidade" value="${userSession.getLocalidade()}"
-							placeholder="Digite a localidade">
+							placeholder="Digite a localidade" required="required">
 					</div>
 					
 					<div class="form-group col-md-2">
 						<label>CEP</label>
 						<input type="text" class="form-control" name="cep" value="${userSession.getCep()}"
-							placeholder="Digite o CEP">
+							placeholder="Digite o CEP" required="required">
 					</div>
 					
 					<div class="form-group col-md-3">
 						<label>Bairro</label>
 						<input type="text" class="form-control" name="bairro" value="${userSession.getBairro()}"
-							placeholder="Digite o bairro">
+							placeholder="Digite o bairro" required="required">
 					</div>
 					
 					<div class="form-group col-md-2">
 						<label>Logradouro</label>
 						<input type="text" class="form-control" name="logradouro" value="${userSession.getLogradouro()}"
-							placeholder="Digite o logradouro">
+							placeholder="Digite o logradouro" required="required">
 					</div>
 					
 					<div class="form-group col-md-1">
 						<label>Numero</label>
 						<input type="text" class="form-control" name="numero" value="${userSession.getNumero()}"
-							placeholder="Numero">
+							placeholder="Numero" required="required">
 					</div>
 				</div>
 				
 				<div class="form-group float-right">
 					<button class="btn btn-danger" onclick="removerUsuario()" type="button">Excluir Conta</button>
-					<button type="submit" class="btn btn-default">Salvar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
 				</div>
 			</form>
 		</div>
