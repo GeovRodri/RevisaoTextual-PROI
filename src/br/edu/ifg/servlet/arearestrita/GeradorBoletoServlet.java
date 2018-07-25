@@ -12,10 +12,12 @@ import br.edu.ifg.util.GeradorPDF;
 
 @WebServlet("/area-restrita/gerar-boleto")
 public class GeradorBoletoServlet extends HttpServlet{
-
+	// Servlet para gerar o boleto para o usuario.
+	 
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Neste método é criado um objeto GeradoPDF que criará o boleto através de requisições
 		GeradorPDF boleto = new GeradorPDF();
 		boleto.crieBoletos(request, response);
 	}
