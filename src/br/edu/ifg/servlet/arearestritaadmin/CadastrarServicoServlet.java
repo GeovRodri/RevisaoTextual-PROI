@@ -44,7 +44,7 @@ public class CadastrarServicoServlet extends HttpServlet {
 			Servico servico = new Servico();			
 			servido.setDescricao(descricao);
 			servico.setCaracteristicas(caracteristicas);
-			servicoDAO.adicionaServico(servico);
+			servicoDAO.salvarServico(servico);
 			
 			
 			ServicoValor pagina = new ServicoValor(servico.getId(),0,vPagina);
