@@ -42,8 +42,8 @@ public class CadastrarServicoServlet extends HttpServlet {
 		//Cadastrando Servico
 			
 			Servico servico = new Servico();			
-			servido.setDescricao(descricao);
-			servico.setCaracteristicas(caracteristicas);
+			servido.setDescricao("teste");
+			servico.setCaracteristicas("teste");
 			servicoDAO.salvarServico(servico);
 			
 			
@@ -54,12 +54,14 @@ public class CadastrarServicoServlet extends HttpServlet {
 			lista.add(pagina);
 			lista.add(palavra);
 			lista.add(lauda);
+			servido.setDescricao(descricao);
+			servico.setCaracteristicas(caracteristicas);
 			servico.setServicoValores(lista);
 			
 			servicoValorDAO.adicionaServicoValor(pagina);
 			servicoValorDAO.adicionaServicoValor(palavra);
 			servicoValorDAO.adicionaServicoValor(lauda);
-			servicoDAO.adicionaServico(servico);
+			servicoDAO.alterarServico(servico);
 
 		}else{
 
