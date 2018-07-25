@@ -15,6 +15,7 @@
 						<label>Serviço</label>
 						<select name="servicoId" class="form-control" required>
 							<option value="">Selecione um serviço </option>
+							<option value="1">1</option>
 						</select>
 					</div>
 				</div>

@@ -45,6 +45,45 @@
 					</div>
 				</div>
 				
+				<!-- Endereço -->
+				<div class="form-row">
+					<div class="form-group col-md-1">
+						<label>UF</label>
+						<input type="text" class="form-control" name="uf" value="${userSession.getUf()}"
+							placeholder="UF" maxlength="2">
+					</div>
+					
+					<div class="form-group col-md-3">
+						<label>Localidade</label>
+						<input type="text" class="form-control" name="localidade" value="${userSession.getLocalidade()}"
+							placeholder="Digite a localidade">
+					</div>
+					
+					<div class="form-group col-md-2">
+						<label>CEP</label>
+						<input type="text" class="form-control" name="cep" value="${userSession.getCep()}"
+							placeholder="Digite o CEP">
+					</div>
+					
+					<div class="form-group col-md-3">
+						<label>Bairro</label>
+						<input type="text" class="form-control" name="bairro" value="${userSession.getBairro()}"
+							placeholder="Digite o bairro">
+					</div>
+					
+					<div class="form-group col-md-2">
+						<label>Logradouro</label>
+						<input type="text" class="form-control" name="logradouro" value="${userSession.getLogradouro()}"
+							placeholder="Digite o logradouro">
+					</div>
+					
+					<div class="form-group col-md-1">
+						<label>Numero</label>
+						<input type="text" class="form-control" name="numero" value="${userSession.getNumero()}"
+							placeholder="Numero">
+					</div>
+				</div>
+				
 				<div class="form-group float-right">
 					<button class="btn btn-danger" onclick="removerUsuario()" type="button">Excluir Conta</button>
 					<button type="submit" class="btn btn-default">Salvar</button>
