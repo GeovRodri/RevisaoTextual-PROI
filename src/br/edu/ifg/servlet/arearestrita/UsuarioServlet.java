@@ -1,4 +1,4 @@
-package br.edu.ifg.servlet;
+package br.edu.ifg.servlet.arearestrita;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,6 +37,14 @@ public class UsuarioServlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String confirmacaoSenha = request.getParameter("confirmacao-senha");
 		
+		// Endereço
+		String uf = request.getParameter("uf");
+		String localidade = request.getParameter("localidade");
+		String cep = request.getParameter("cep");
+		String bairro = request.getParameter("bairro");
+		String logradouro = request.getParameter("logradouro");
+		String numero = request.getParameter("numero");
+		
 		// Verificando se as senhas são diferentes
 		if (!senha.equals(confirmacaoSenha)) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("alterar-dados.jsp");
@@ -49,7 +57,7 @@ public class UsuarioServlet extends HttpServlet {
 		} else {
 			
 			// Alterando usuário
-			Usuario usuario = new Usuario(id, nome, email, cpf, senha);
+			Usuario usuario = new Usuario(id, nome, email, cpf, uf, localidade, cep, bairro, logradouro, numero);
 			usuarioDAO.alterar(usuario);
 			
 			// Alterando a senha do usuario caso ele tenha preenchido

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifg.enums.TipoUsuarioEnum;
 import br.edu.ifg.jdbc.ConnectionFactory;
@@ -20,7 +18,8 @@ public class UsuarioDAO {
 	}
 	
 	public void adiciona(Usuario usuario) {
-		String sql = "INSERT INTO usuario (cpf, nome, senha, email, tipo) values (?,?,?,?,?)";
+		String sql = "INSERT INTO usuario (cpf, nome, senha, email, tipo, uf, localidade, cep, bairro, logradouro, numero) "
+				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -47,14 +46,7 @@ public class UsuarioDAO {
 
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
-				user = new Usuario();
-				
-				user.setId(rs.getInt("id"));
-				user.setCpf(rs.getString("cpf"));
-				user.setNome(rs.getString("nome"));
-				user.setSenha(rs.getString("senha"));
-				user.setEmail(rs.getString("email"));
-				user.setTipo(TipoUsuarioEnum.lookup(rs.getString("tipo")));
+				user = preencherUsuario(rs);
 			}
 			
 			rs.close();
@@ -63,6 +55,27 @@ public class UsuarioDAO {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private Usuario preencherUsuario(ResultSet rs) throws SQLException {
+		Usuario user;
+		user = new Usuario();
+		
+		user.setId(rs.getInt("id"));
+		user.setCpf(rs.getString("cpf"));
+		user.setNome(rs.getString("nome"));
+		user.setSenha(rs.getString("senha"));
+		user.setEmail(rs.getString("email"));
+		user.setTipo(TipoUsuarioEnum.lookup(rs.getString("tipo")));
+		
+		// endereço
+		user.setUf(rs.getString("uf"));
+		user.setLocalidade(rs.getString("localidade"));
+		user.setCep(rs.getString("cep"));
+		user.setBairro(rs.getString("bairro"));
+		user.setLogradouro(rs.getString("logradouro"));
+		user.setNumero(rs.getString("numero"));
+		return user;
 	}
 
 	public Usuario buscarPorEmail(String email) {
@@ -76,14 +89,7 @@ public class UsuarioDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				user = new Usuario();
-				
-				user.setId(rs.getInt("id"));
-				user.setCpf(rs.getString("cpf"));
-				user.setNome(rs.getString("nome"));
-				user.setSenha(rs.getString("senha"));
-				user.setEmail(rs.getString("email"));
-				user.setTipo(TipoUsuarioEnum.lookup(rs.getString("tipo")));
+				user = preencherUsuario(rs);
 			}
 
 			rs.close();
@@ -94,37 +100,19 @@ public class UsuarioDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
-	public List<Usuario> getLista() {
-		try {
-			List<Usuario> usuarios = new ArrayList<Usuario>();
-			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos");
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				Usuario usuario = new Usuario();
-				
-				usuario.setId(rs.getInt("id"));
-				usuario.setCpf(rs.getString("cpf"));
-				usuario.setNome(rs.getString("nome"));
-				usuario.setSenha(rs.getString("senha"));
-				usuario.setEmail(rs.getString("email"));
-				usuario.setTipo(TipoUsuarioEnum.lookup(rs.getString("tipo")));
-				
-				usuarios.add(usuario);
-			}
-			
-			rs.close();
-			stmt.close();
-			
-			return usuarios;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
 	
 	public void alterar(Usuario usuario) {
-		String sql = "UPDATE usuario SET cpf = ?, nome = ?, email = ? WHERE id = ?";
+		String sql = "UPDATE usuario SET "
+										+ "cpf = ?, "
+										+ "nome = ?, "
+										+ "email = ?, "
+										+ "uf = ?, "
+										+ "localidade = ?, "
+										+ "cep = ?, "
+										+ "bairro = ?, "
+										+ "logradouro = ?, "
+										+ "numero = ? "
+					+ "WHERE id = ?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -132,6 +120,14 @@ public class UsuarioDAO {
 			stmt.setString(2, usuario.getNome());
 			stmt.setString(3, usuario.getEmail());
 			stmt.setInt(4, usuario.getId());
+			
+			// Endereço
+			stmt.setString(5, usuario.getUf());
+			stmt.setString(6, usuario.getLocalidade());
+			stmt.setString(7, usuario.getCep());
+			stmt.setString(8, usuario.getBairro());
+			stmt.setString(9, usuario.getLogradouro());
+			stmt.setString(10, usuario.getNumero());
 			
 			stmt.execute();
 			stmt.close();

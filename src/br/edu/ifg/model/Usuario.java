@@ -22,13 +22,21 @@ public class Usuario {
 	public Usuario() {
 	}
 	
-	public Usuario(int id, String nome, String email, String cpf, String senha) {
-		super();
+	public Usuario(int id, String nome, String email, String cpf, String uf, String localidade, 
+			String cep, String bairro, String logradouro, String numero) {
+		
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
-		this.senha = senha;
+		
+		// Endereço
+		this.uf = uf;
+		this.localidade = localidade;
+		this.cep = cep;
+		this.bairro = bairro;
+		this.logradouro = logradouro;
+		this.numero = numero;
 	}
 	
 	public Usuario(int id, String nome, String email, String tipo) {
