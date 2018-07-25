@@ -10,12 +10,13 @@ import br.edu.ifg.dao.ServicoDAO;
 
 @WebServlet("/area-restrita-admin/listar-servicos")
 public class ListarServicoServlet extends HttpServlet {
+	//Servlet para gerenciamento dos serviços
 	
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Retornando uma lista de servicos
+		//Retornando os servicos
 		ServicoDAO servicoDAO = new ServicoDAO();
 		servicoDAO.getAll();
 		 

@@ -24,7 +24,7 @@ public class CadastrarServicoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//Cadastrando novo servico
 		ServicoDAO servicoDAO = new ServicoDAO();
 		ServicoValorDAO servicoValorDAO = new ServicoValorDAO(); 
 		PrintWriter out = response.getWriter();

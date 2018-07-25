@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Servico {
-	
+	//Informações do Servico
 	private Integer id;
 	private String descricao;
 	private String caracteristicas;
 	private List<ServicoValor> servicoValores = new ArrayList<>();
 	
+	//Constutor
 	public Servico(Integer id, String descricao, String caracteristicas) {
 		super();
 		this.id = id;
@@ -17,10 +18,12 @@ public class Servico {
 		this.caracteristicas = caracteristicas;
 	}
 	
+	//Sobrecarga de construtor
 	public Servico() {
 		super();
 	}
-
+	
+	//Getters e Setters
 	public Integer getId() {
 		return id;
 	}

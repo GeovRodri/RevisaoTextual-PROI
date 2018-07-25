@@ -3,24 +3,26 @@ package br.edu.ifg.model;
 import br.edu.ifg.enums.CobrancaEnum;
 
 public class ServicoValor {
-	
+	//Informações do servico referentes ao valor
 	private Integer id;
 	private Integer idServico;
 	private String nomeServico;
 	private CobrancaEnum formaPagamento;
 	private Double valor;
 	
+	//Construtor
 	public ServicoValor(Integer id, String formaPagamento, Double valor) {
 		super();
 		this.idServico = id;
 		this.formaPagamento = CobrancaEnum.lookup(formaPagamento);
 		this.valor = valor;
 	}
-	
+	//Sobrecarga de construtor
 	public ServicoValor() {
 		super();
 	}
-
+	
+	//Getters e Setters
 	public CobrancaEnum getFormaPagamento() {
 		return formaPagamento;
 	}

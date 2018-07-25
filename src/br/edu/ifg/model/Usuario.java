@@ -3,15 +3,14 @@ package br.edu.ifg.model;
 import br.edu.ifg.enums.TipoUsuarioEnum;
 
 public class Usuario {
-
+	//Informações do usuario
 	private int id;
 	private String cpf;
 	private String nome;
 	private String senha;
 	private String email;
-	private TipoUsuarioEnum tipo;
-	
-	// EndereÃ§o
+	private TipoUsuarioEnum tipo;//Usuario comum ou Adm
+
 	private String uf;
 	private String localidade;
 	private String cep;
@@ -21,7 +20,7 @@ public class Usuario {
 
 	public Usuario() {
 	}
-	
+	//Construtor
 	public Usuario(int id, String nome, String email, String cpf, String uf, String localidade, 
 			String cep, String bairro, String logradouro, String numero) {
 		
@@ -38,7 +37,7 @@ public class Usuario {
 		this.logradouro = logradouro;
 		this.numero = numero;
 	}
-	
+	//Sobrecarga de constutor
 	public Usuario(int id, String nome, String email, String tipo) {
 		super();
 		this.id = id;
@@ -46,7 +45,7 @@ public class Usuario {
 		this.email = email;
 		this.tipo = TipoUsuarioEnum.lookup(tipo);
 	}
-
+	//Metodos Getters e Setters
 	public int getId() {
 		return id;
 	}
