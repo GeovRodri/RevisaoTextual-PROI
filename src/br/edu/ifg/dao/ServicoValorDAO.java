@@ -21,6 +21,7 @@ public class ServicoValorDAO {
 	*@param id identificador do serviço
 	*/
 	public void removerValorServico(Integer id){
+		
 		String sql = "DELETE servicoValores FROM servico WHERE idServico = '?'";
 		//criação do comando SQL a ser executado no banco
 		try{
