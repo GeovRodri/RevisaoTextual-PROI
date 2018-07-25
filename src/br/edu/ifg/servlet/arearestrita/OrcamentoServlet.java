@@ -1,4 +1,4 @@
-package br.edu.ifg.servlet;
+package br.edu.ifg.servlet.arearestrita;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.edu.ifg.util.PdfParser;
 
 @MultipartConfig
-@WebServlet("/area-restrita/OrcamentoServlet")
+@WebServlet("/area-restrita/orcamento")
 public class OrcamentoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -2535264930309928221L;
@@ -20,12 +20,6 @@ public class OrcamentoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PdfParser orcamento = new PdfParser();
-		/*try {*/
-			orcamento.executa(request, response);
-			
-		/*} catch (Exception e) {
-			System.out.println("Arquivo inválido: " + e.getMessage());
-		}*/
-		
+		orcamento.executa(request, response);
 	}
 }

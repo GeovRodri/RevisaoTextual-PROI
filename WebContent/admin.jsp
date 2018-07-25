@@ -11,7 +11,7 @@
 			
 			<div class="col-sm-4">
 				<form class="form-signin" action="<%=request.getContextPath()%>/login" method="POST">
-					<input name="tipo" value="admin" style="display: none;">
+					<input name="tipo" value="1" style="display: none;">
 				
 					<div class="form-group">
 						<label>Email</label>

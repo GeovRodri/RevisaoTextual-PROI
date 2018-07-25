@@ -84,7 +84,8 @@
 
 			<nav id="nav-menu-container">
 				<ul class="nav-menu">
-
+	
+					<!-- Verificando se é a pagina ativa, porque se for tem que trocar a cor -->
 					<c:choose>
       					<c:when test="${fn:containsIgnoreCase(pageContext.request.requestURI, 'index.jsp')}">
 							<li class="menu-active"> <a href="javascript:void(0)">Página Inicial</a> </li>			
@@ -121,6 +122,7 @@
 						</c:otherwise>
    					</c:choose>
    					
+   					<!-- Verificando se o cara está logado -->
    					<c:choose>
       					<c:when test="${userSession != null}">
 		   					<c:choose>
@@ -129,6 +131,20 @@
 								</c:when>
 		      					<c:otherwise>
 									<li> <a href="<%=request.getContextPath()%>/area-restrita/area-cliente.jsp">Realizar Orçamento</a> </li>
+								</c:otherwise>
+		   					</c:choose>
+	   					</c:when>
+   					</c:choose>
+   					
+   					<!-- Verificando se está logado e se é admin -->
+   					<c:choose>
+      					<c:when test="${userSession != null && userSession.getTipo().getId().equals('1')}">
+		   					<c:choose>
+		      					<c:when test="${fn:containsIgnoreCase(pageContext.request.requestURI, 'servico.jsp')}">
+									<li class="menu-active"> <a href="javascript:void(0)">Gerenciar Serviços</a> </li>			
+								</c:when>
+		      					<c:otherwise>
+									<li> <a href="<%=request.getContextPath()%>/area-restrita-admin/servico.jsp">Gerenciar Serviços</a> </li>
 								</c:otherwise>
 		   					</c:choose>
 	   					</c:when>

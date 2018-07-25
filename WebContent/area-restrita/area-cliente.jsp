@@ -2,13 +2,36 @@
 <%@ include file="../includes/header.jsp"%>
 
 <section>
+	<div class="container">
+		<div class="section-header">
+			<h2>Realizar Orçamento</h2>
+		</div>
+	
+		<div class="form">
 
-	<form action="OrcamentoServlet" method="post" enctype="multipart/form-data">
-		<input type="text" name="texto">
-		<input type="file" name="file">
-		<input type="submit" value="Upload">
-	</form>
-
+			<form action="orcamento" method="post" enctype="multipart/form-data">
+				<div class="form-row">	
+					<div class="form-group col-md-4">
+						<label>Serviço</label>
+						<select name="servicoId" class="form-control" required>
+							<option value="">Selecione um serviço </option>
+						</select>
+					</div>
+				</div>
+					
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label>Arquivo</label>
+						<input type="file" name="file" class="form-control-file">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Gerar</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </section>
 
 <%@ include file="../includes/footer.jsp"%>
