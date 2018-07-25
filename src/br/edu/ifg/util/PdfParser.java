@@ -1,5 +1,8 @@
 package br.edu.ifg.util;
-
+/**
+ * Classe utilizada para extrair os metadados do pdf fazer o calculo e retornar a pag de orçamento
+ *
+ */
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -93,7 +96,7 @@ public class PdfParser {
 				}
 			}
 			
-			res.sendRedirect("pagamento.jsp");
+			res.sendRedirect("orcamento.jsp");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
