@@ -3,10 +3,7 @@ package br.edu.ifg.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.edu.ifg.jdbc.ConnectionFactory;
 import br.edu.ifg.model.ServicoValor;
