@@ -1,4 +1,4 @@
-package br.edu.ifg.servlet;
+package br.edu.ifg.servlet.arearestritaadmin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,18 +19,20 @@ import br.edu.ifg.dao.ServicoDAO;
 import br.edu.ifg.model.Servico;
 
 @WebServlet("/area-restrita-admin/listar-servicos")
-public class Listar extends HttpServlet {
+public class ListarServicoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected Servico doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServicoDAO servicoDAO = new ServicoDAO();
 		List<Servico> servicos = servicoDAO.getAll();
 		return sevicos; 
 	}
 
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException ){
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		ServicoDAO servicoDAO = new ServicoDAO();
 		servicoDAO.recoverServico(getParamenter("id"));
 	}
+}
