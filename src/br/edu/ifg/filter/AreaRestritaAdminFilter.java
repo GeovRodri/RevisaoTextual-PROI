@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import br.edu.ifg.enums.TipoUsuarioEnum;
 import br.edu.ifg.model.Usuario;
 
+/*Classe responsável por impedir que o usuário entre
+*na área restrita se não estiver logado e se não for um admin
+*/
 @WebFilter("/area-restrita-admin/*")
 public class AreaRestritaAdminFilter implements Filter {
 
