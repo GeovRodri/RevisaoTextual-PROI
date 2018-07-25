@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import br.edu.ifg.model.Usuario;
 
+/* classe responsável por impedir que um usuário entre na área restrita 
+* se não estiver logado
+*/
 @WebFilter("/area-restrita/*")
 public class AreaRestritaFilter implements Filter {
 
