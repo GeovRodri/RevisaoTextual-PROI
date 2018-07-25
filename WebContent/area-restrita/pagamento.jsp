@@ -15,7 +15,7 @@
 		</div>
 		
 		<div class="float-right">
-			<a type="button" class="btn btn-primary" href="#">Realizar Pagamento via Boleto</a>
+			<a type="button" class="btn btn-primary" href="gerar-boleto">Realizar Pagamento via Boleto</a>
 		</div>
 	</div>
 	
