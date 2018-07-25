@@ -19,8 +19,6 @@ public class ServicoValor {
 	
 	public ServicoValor() {
 		super();
-		this.formaPagamento = CobrancaEnum.lookup(formaPagamento);
-		this.valor = valor;
 	}
 
 	public CobrancaEnum getFormaPagamento() {
