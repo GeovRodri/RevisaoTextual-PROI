@@ -13,16 +13,16 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>DescriÁ„o</th>
+					<th>Descri√ß√£o</th>
 					<th>Caracteristicas</th>
-					<th>Valor p·gina</th>
+					<th>Valor p√°gina</th>
 					<th>Valor lauda</th>
 					<th>Valor palavra</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="servico" items="${listAll}" varStatus="id">
+				<c:forEach var="servico" items="${listAll}" varStatus="id" method="get">
 					<tr>
 						<td>${servico.id}</td>
 						<td>${servico.descricao}</td>
