@@ -42,14 +42,15 @@ public class CadastrarServicoServlet extends HttpServlet {
 		//Cadastrando Servico
 			
 			Servico servico = new Servico();			
-			servido.setDescricao(descricao);
+			servico.setDescricao(descricao);
 			servico.setCaracteristicas(caracteristicas);
 			servicoDAO.salvarServico(servico);
 			
+			Integer i = servico.getId() 
 			
-			ServicoValor pagina = new ServicoValor(servico.getId(),'0',vPagina);
-			ServicoValor palavra = new ServicoValor(servico.getId(),'1',vLauda);
-			ServicoValor lauda = new ServicoValor(servico.getId(),'2',vPalavra);
+			ServicoValor pagina = new ServicoValor(i,'0',vPagina);
+			ServicoValor palavra = new ServicoValor(i,'1',vLauda);
+			ServicoValor lauda = new ServicoValor(i,'2',vPalavra);
 			
 			lista.add(pagina);
 			lista.add(palavra);
