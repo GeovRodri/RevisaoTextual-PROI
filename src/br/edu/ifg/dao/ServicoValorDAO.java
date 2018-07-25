@@ -35,9 +35,9 @@ public class ServicoValorDAO {
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, valor.getFormaPagamento());
+			stmt.setString(1, valor.getFormaPagamento.name());
 			stmt.setDouble(2, valor.getValor());
-			stmt.setInt(3, valor.id_servico());
+			stmt.setInt(3, valor.getIdServico());
 			
 			stmt.execute();
 			stmt.close();
