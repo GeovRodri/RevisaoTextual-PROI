@@ -119,15 +119,16 @@ public class UsuarioDAO {
 			stmt.setString(1, usuario.getCpf());
 			stmt.setString(2, usuario.getNome());
 			stmt.setString(3, usuario.getEmail());
-			stmt.setInt(4, usuario.getId());
 			
 			// Endereço
-			stmt.setString(5, usuario.getUf());
-			stmt.setString(6, usuario.getLocalidade());
-			stmt.setString(7, usuario.getCep());
-			stmt.setString(8, usuario.getBairro());
-			stmt.setString(9, usuario.getLogradouro());
-			stmt.setString(10, usuario.getNumero());
+			stmt.setString(4, usuario.getUf());
+			stmt.setString(5, usuario.getLocalidade());
+			stmt.setString(6, usuario.getCep());
+			stmt.setString(7, usuario.getBairro());
+			stmt.setString(8, usuario.getLogradouro());
+			stmt.setString(9, usuario.getNumero());
+			
+			stmt.setInt(10, usuario.getId());
 			
 			stmt.execute();
 			stmt.close();

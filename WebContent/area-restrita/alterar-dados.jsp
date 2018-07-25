@@ -79,7 +79,7 @@
 					
 					<div class="form-group col-md-1">
 						<label>Numero</label>
-						<input type="text" class="form-control" name="numero" value="${userSession.getNumero()}"
+						<input type="number" class="form-control" name="numero" value="${userSession.getNumero()}"
 							placeholder="Numero" required="required">
 					</div>
 				</div>
