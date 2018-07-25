@@ -12,17 +12,21 @@ import br.edu.ifg.model.Usuario;
 public class UsuarioDAO {
 
 	private Connection connection;
-
+	//estabelece conexão com a base de dados
 	public UsuarioDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
-	
+	/*Persiste um novo usuário na base
+	*@param usuario objeto com os dados a serem inseridos
+	*/
 	public void adiciona(Usuario usuario) {
+		//criação do comando SQL a ser executado
 		String sql = "INSERT INTO usuario (cpf, nome, senha, email, tipo, uf, localidade, cep, bairro, logradouro, numero) "
 				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
+			//inserção dos valores no SQL
 			stmt.setString(1, usuario.getCpf());
 			stmt.setString(2, usuario.getNome());
 			stmt.setString(3, usuario.getSenha());
@@ -36,9 +40,13 @@ public class UsuarioDAO {
 		}
 	}
 
+	/* Retorna um usuário identificado pelo id
+	*@param id identificador do usuario
+	*/
 	public Usuario buscar(Integer id) {
 		try {
 			Usuario user = null;
+			//cria um objeto vazio para receber os dados
 			String sql = ("SELECT * FROM usuario WHERE id = ?");
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -46,6 +54,7 @@ public class UsuarioDAO {
 
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
+				//chama o metodo responsável por inserir os dados
 				user = preencherUsuario(rs);
 			}
 			
@@ -56,11 +65,13 @@ public class UsuarioDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
+	/* Insere os dados em um usuário
+	*@param rs resultado de uma consulta SQL contendo dados de um usuário
+	*/
 	private Usuario preencherUsuario(ResultSet rs) throws SQLException {
 		Usuario user;
 		user = new Usuario();
-		
+		//inserção dos dados
 		user.setId(rs.getInt("id"));
 		user.setCpf(rs.getString("cpf"));
 		user.setNome(rs.getString("nome"));
@@ -78,6 +89,9 @@ public class UsuarioDAO {
 		return user;
 	}
 
+	/* Realiza a busca de um usuário usando o email
+	*@param email email do usuario almejado
+	*/
 	public Usuario buscarPorEmail(String email) {
 		try {
 			Usuario user = null;
@@ -101,6 +115,9 @@ public class UsuarioDAO {
 		}
 	}
 	
+	/* Altera os dados de um usuário
+	*@param objeto contendo os  novos dados
+	*/
 	public void alterar(Usuario usuario) {
 		String sql = "UPDATE usuario SET "
 										+ "cpf = ?, "
@@ -137,6 +154,9 @@ public class UsuarioDAO {
 		}
 	}
 	
+	/* Altera a senha de um usuári
+	*@param usuario usuario alvo da alteração
+	*/
 	public void alterarSenha(Usuario usuario) {
 		String sql = "UPDATE usuario SET senha = ? WHERE id = ?";
 		
@@ -152,6 +172,9 @@ public class UsuarioDAO {
 		}
 	}
 	
+	/* Remove um usuario da base de dados
+	*@param id indentificador do usuario alvo
+	*/
 	public void excluirUsuario(Integer id) {
 		String sql = "DELETE FROM usuario WHERE id = ?";
 
