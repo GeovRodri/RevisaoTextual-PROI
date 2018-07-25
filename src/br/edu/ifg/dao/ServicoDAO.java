@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifg.enums.TipoUsuarioEnum;
 import br.edu.ifg.jdbc.ConnectionFactory;
 import br.edu.ifg.model.Servico;
 import br.edu.ifg.model.ServicoValor;
+import br.edu.ifg.model.Usuario;
 
 public class ServicoDAO {
 	
@@ -38,6 +40,30 @@ public class ServicoDAO {
 			rs.close();
 			stmt.close();
 			return servicos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public Servico getServico(Integer id){	
+		try {
+			String sql = "SELECT id, descricao, caracteristicas FROM servico WHERE id = ?";
+			Servico servico = null;
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				servico = new Servico();
+				
+				servico.setId(rs.getInt("id"));
+				servico.setDescricao(rs.getString("descricao"));
+				servico.setCaracteristicas(rs.getString("caracteristicas"));
+				servico.setServicoValores(this.getValores(servico.getId()));
+			}
+			rs.close();
+			stmt.close();
+			return servico;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -112,5 +138,4 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
 }
