@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,6 +34,8 @@ import br.edu.ifg.model.Usuario;
 public class GeradorPDF {
 		
 	public void crieBoletos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/pdf");
+		
 		ContaBancaria contaBancaria = crieUmaContaBancaria();
 		Cedente cedente = crieUmCedente(); 
 		
@@ -47,9 +50,15 @@ public class GeradorPDF {
         }
 				
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
-		File arquivoPdf = boletoViewer.getPdfAsFile((pathBoletos + "/" + UUID.randomUUID().toString() + ".pdf"));
+		boletoViewer.getPdfAsFile((pathBoletos + "/" + UUID.randomUUID().toString() + ".pdf"));
 		
-		response.sendRedirect(arquivoPdf.getPath());
+		byte[] arquivo = boletoViewer.getPdfAsByteArray();
+		response.setContentLength(arquivo.length);
+		
+		ServletOutputStream ouputStream = response.getOutputStream();
+		ouputStream.write(arquivo, 0, arquivo.length);
+		ouputStream.flush();
+		ouputStream.close();
 	}
 
 	private Boleto crieOsDadosDoNovoBoleto(Boleto boleto) {		
