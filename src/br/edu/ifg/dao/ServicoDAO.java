@@ -23,14 +23,16 @@ public class ServicoDAO {
 	//Metodo responsável por retornar uma lista de serviços
 	public List<Servico> getAll() {
 		try {
-			 List<Servico> servicos = new ArrayList<>();
+			 List<Servico> servicos = new ArrayList<>();//lista que ira receber os serviços
 			
-			String sql = "SELECT id, descricao, caracteristicas FROM servico";
+			String sql = "SELECT id, descricao, caracteristicas FROM servico";// SQL que será executada no banco
 			
 			PreparedStatement stmt = this.connection.prepareStatement(sql);
+			// rs recebe o resultado da consulta feita no banco
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
+				//percorre o resultado, adicionando os serviços na lista
 				Servico servico = new Servico(rs.getInt("id"), rs.getString("descricao"), rs.getString("caracteristicas"));
 				servico.setServicoValores(this.getValores(servico.getId()));
 				
@@ -51,14 +53,14 @@ public class ServicoDAO {
 	public Servico getServico(Integer id){	
 		try {
 			String sql = "SELECT id, descricao, caracteristicas FROM servico WHERE id = ?";
-			Servico servico = null;
+			Servico servico = null;	//criação de um objeto vazio para receber os dados
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			
 			if (rs.next()) {
 				servico = new Servico();
-				
+				// insere os dados no objeto 
 				servico.setId(rs.getInt("id"));
 				servico.setDescricao(rs.getString("descricao"));
 				servico.setCaracteristicas(rs.getString("caracteristicas"));
