@@ -133,6 +133,19 @@
 		   					</c:choose>
 	   					</c:when>
    					</c:choose>
+   					
+   					<c:choose>
+      					<c:when test="${userSession != null && userSession.getTipo().getId().equals('1')}">
+		   					<c:choose>
+		      					<c:when test="${fn:containsIgnoreCase(pageContext.request.requestURI, 'servico.jsp')}">
+									<li class="menu-active"> <a href="javascript:void(0)">Gerenciar Serviços</a> </li>			
+								</c:when>
+		      					<c:otherwise>
+									<li> <a href="<%=request.getContextPath()%>/area-restrita-admin/servico.jsp">Gerenciar Serviços</a> </li>
+								</c:otherwise>
+		   					</c:choose>
+	   					</c:when>
+   					</c:choose>
 				</ul>
 			</nav>
 		</div>

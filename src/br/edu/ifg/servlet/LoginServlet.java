@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.edu.ifg.dao.UsuarioDAO;
+import br.edu.ifg.enums.TipoUsuarioEnum;
 import br.edu.ifg.model.Usuario;
 
 
@@ -41,6 +42,18 @@ public class LoginServlet extends HttpServlet  {
 		if (usuario != null) {
 			// comparando as senhas
 			if (usuario.getSenha().equals(senha)) {
+				if (tipo != null && !tipo.isEmpty()) {
+					
+					if (usuario.getTipo().compareTo(TipoUsuarioEnum.lookup(tipo)) != 0) {
+						RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
+						dispatcher.include(request, response);
+				        
+				        // colocando alert para exibir na tela
+				        out.print("<script>");
+				        out.print("		alert('Esse usuário não é administrador!');");
+				        out.print("</script>");
+					}
+				}
 				
 				session.setAttribute("userSession", usuario);
 				response.sendRedirect("area-restrita/area-cliente.jsp");
@@ -62,7 +75,15 @@ public class LoginServlet extends HttpServlet  {
 		        out.print("</script>");
 			}
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher dispatcher = null;
+			
+			// decidindo qual pagina será retornada de acordo com o tipo de login
+			if (tipo.isEmpty()) {
+				dispatcher = request.getRequestDispatcher("index.jsp");
+			} else {
+				dispatcher = request.getRequestDispatcher("admin.jsp");
+			}
+			
 	        dispatcher.include(request, response);
 	        
 	        // colocando alert para exibir na tela
