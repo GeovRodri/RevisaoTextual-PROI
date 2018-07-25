@@ -42,20 +42,18 @@ public class CadastrarServicoServlet extends HttpServlet {
 		//Cadastrando Servico
 			
 			Servico servico = new Servico();			
-			servido.setDescricao("teste");
-			servico.setCaracteristicas("teste");
+			servido.setDescricao(descricao);
+			servico.setCaracteristicas(caracteristicas);
 			servicoDAO.salvarServico(servico);
 			
 			
-			ServicoValor pagina = new ServicoValor(servico.getId(),0,vPagina);
-			ServicoValor palavra = new ServicoValor(servico.getId(),1,vLauda);
-			ServicoValor lauda = new ServicoValor(servico.getId(),2,vPalavra);
+			ServicoValor pagina = new ServicoValor(servico.getId(),'0',vPagina);
+			ServicoValor palavra = new ServicoValor(servico.getId(),'1',vLauda);
+			ServicoValor lauda = new ServicoValor(servico.getId(),'2',vPalavra);
 			
 			lista.add(pagina);
 			lista.add(palavra);
 			lista.add(lauda);
-			servido.setDescricao(descricao);
-			servico.setCaracteristicas(caracteristicas);
 			servico.setServicoValores(lista);
 			
 			servicoValorDAO.adicionaServicoValor(pagina);
@@ -70,9 +68,9 @@ public class CadastrarServicoServlet extends HttpServlet {
 						
 			Servico servico = new Servico(id,descricao,caracteristicas);
 			
-			ServicoValor pagina = new ServicoValor(id,0,vPagina);
-			ServicoValor palavra = new ServicoValor(id,1,vLauda);
-			ServicoValor lauda = new ServicoValor(id,2,vPalavra);
+			ServicoValor pagina = new ServicoValor(id,'0',vPagina);
+			ServicoValor palavra = new ServicoValor(id,'1',vLauda);
+			ServicoValor lauda = new ServicoValor(id,'2',vPalavra);
 			
 			lista.add(pagina); 
 			lista.add(palavra);
