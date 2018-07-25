@@ -15,10 +15,12 @@ public class ServicoDAO {
 	
 	private Connection connection;
 
+	//Realiza a conexão com o banco de dados
 	public ServicoDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
 
+	//Metodo responsável por retornar uma lista de serviços
 	public List<Servico> getAll() {
 		try {
 			 List<Servico> servicos = new ArrayList<>();
@@ -43,6 +45,9 @@ public class ServicoDAO {
 		}
 	}
 	
+	/*Busca e Retorna um servico especifico, baseado no id 
+	*@param id identificador do servico
+	*/
 	public Servico getServico(Integer id){	
 		try {
 			String sql = "SELECT id, descricao, caracteristicas FROM servico WHERE id = ?";
@@ -67,6 +72,9 @@ public class ServicoDAO {
 		}
 	}
 	
+	/*Retrona os Valores de um determinado serviço
+	*@param idServico identifica o servico alvo da busca
+	*/
 	public List<ServicoValor> getValores(Integer idServico) {
 		try {
 			List<ServicoValor> valores = new ArrayList<>();
@@ -89,6 +97,9 @@ public class ServicoDAO {
 		}
 	}
 
+	/* Faz a alteração de um servico já existente
+	*@param servico objeto com os novos dados
+	*/
 	public void alterarServico(Servico servico) {
 		String sql = "UPDATE servico SET descricao = ?, caracteristicas = ?, servicoValores= ? WHERE id = ?";
 		
@@ -107,6 +118,9 @@ public class ServicoDAO {
 		}
 	}
 	
+	/*Exclui um serviço especifico
+	*@param id identificador do serviço
+	*/
 	public void excluirServico(Integer id) {
 		String sql = "DELETE FROM servico WHERE id = ?";
 	
@@ -120,6 +134,10 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/*Persiste um novo serviço e seus valores na base de dados
+	*@param servico objeto que contém os dados a serem inseridos
+	*/
 	public void adicionaServico(Servico servico) {
 		String sql = "INSERT INTO servico (descricao, caracteristicas, servicoValores) values (?,?,?,?)";
 
@@ -136,6 +154,10 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	/*Persiste um serviço na base de dados
+	*@param servico contem os dados para persistencia
+	*/
 	public void salvarServico(Servico servico){
 	String sql = "INSERT INTO servico (descricao, caracteristicas) values (?,?)";
 
