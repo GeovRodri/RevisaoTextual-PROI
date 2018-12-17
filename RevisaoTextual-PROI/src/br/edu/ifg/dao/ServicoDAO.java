@@ -135,7 +135,6 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
 	/*Persiste um novo serviço e seus valores na base de dados
 	*@param servico objeto que contém os dados a serem inseridos
 	*/
@@ -153,5 +152,4 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
 }
