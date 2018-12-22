@@ -1,9 +1,6 @@
 package br.edu.ifg.servlet.arearestritaadmin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,73 +21,46 @@ public class CadastrarServicoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Cadastrando novo servico
-		ServicoDAO servicoDAO = new ServicoDAO();
-		ServicoValorDAO servicoValorDAO = new ServicoValorDAO(); 
-		PrintWriter out = response.getWriter();
+		
 		
 		// pegando os parametros do formulario
-		Integer id = Integer.valueOf(request.getParameter("id"));
 		String descricao = request.getParameter("descricao");
 		String caracteristicas = request.getParameter("caracteristica");
-		Double vPagina =Double.valueOf(request.getParameter("valorpagina"));	
-		Double vLauda = Double.valueOf(request.getParameter("valorlauda"));	
-		Double vPalavra = Double.valueOf(request.getParameter("valorpalavra"));	
+		Double vPagina = Double.valueOf(request.getParameter("valorPagina"));	
+		Double vLauda = Double.valueOf(request.getParameter("valorLauda"));	
+		Double vPalavra = Double.valueOf(request.getParameter("valorPalavra"));	
+	
+		criaServico(descricao,caracteristicas);
 		
-		List<ServicoValor> lista = new ArrayList<ServicoValor>(); 
 		
-		if (request.getParameter("id").equals(null)) {
-		//Cadastrando Servico
+		criarValor(vPagina, vLauda, vPalavra);		
 			
-			Servico servico = new Servico();			
-			servico.setDescricao(descricao);
-			servico.setCaracteristicas(caracteristicas);
-			servicoDAO.salvarServico(servico);
-			
-			
-			ServicoValor pagina = new ServicoValor(servico.getId(),"0",vPagina);
-			ServicoValor palavra = new ServicoValor(servico.getId(),"1",vLauda);
-			ServicoValor lauda = new ServicoValor(servico.getId(),"2",vPalavra);
-			
-			lista.add(pagina);
-			lista.add(palavra);
-			lista.add(lauda);
-			servico.setServicoValores(lista);
-			
-			servicoValorDAO.adicionaServicoValor(pagina);
-			servicoValorDAO.adicionaServicoValor(palavra);
-			servicoValorDAO.adicionaServicoValor(lauda);
-			servicoDAO.alterarServico(servico);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("listar-servico.jsp");
+		dispatcher.include(request, response);
 
-		}else{
+		
+	}
+	public void criaServico(String descricao,String caracteristicas) {
 
-		// Alterando Servico
-			servicoValorDAO.removerValorServico(id);
-						
-			Servico servico = new Servico(id,descricao,caracteristicas);
-			
-			ServicoValor pagina = new ServicoValor(id,"0",vPagina);
-			ServicoValor palavra = new ServicoValor(id,"1",vLauda);
-			ServicoValor lauda = new ServicoValor(id,"2",vPalavra);
-			
-			lista.add(pagina); 
-			lista.add(palavra);
-			lista.add(lauda);
-			servico.setServicoValores(lista);			
-			
-			servicoDAO.alterarServico(servico);
+		ServicoDAO servicoDAO = new ServicoDAO();
+		
+		Servico servico = new Servico();
+		servico.setDescricao(descricao);
+		servico.setCaracteristicas(caracteristicas);
+		
+		servicoDAO.adicionaServico(servico);		
+	}
+	public void criarValor(Double vPagina, Double vLauda, Double vPalavra) {
+		
+		ServicoValor pagina = new ServicoValor("0",vPagina);
+		ServicoValor palavra = new ServicoValor("1",vPalavra);
+		ServicoValor lauda = new ServicoValor("2",vLauda);
+				
+		ServicoValorDAO servicoValorDAO = new ServicoValorDAO();
+		servicoValorDAO.adicionaServicoValor(pagina);
+		servicoValorDAO.adicionaServicoValor(palavra);
+		servicoValorDAO.adicionaServicoValor(lauda);
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastrar-servico.jsp");
-			dispatcher.include(request, response);
-
-			// colocando os valores para exibir na tela
-			out.print("<script>");
-			out.print("$('#descricao').val(descricao);");
-			out.print("$('#caracteristica').val(caracteristica);");
-			out.print("$('#valorpagina').val(vPagina);");
-			out.print("$('#valorlauda').val(vLauda);");
-			out.print("$('#valorpalavra').val(vPalavra);");
-			out.print("</script>");
-		}
 	}
 }
+	

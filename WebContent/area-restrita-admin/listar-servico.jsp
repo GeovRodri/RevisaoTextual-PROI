@@ -3,47 +3,39 @@
 
 <div class="container-fluid">
 	<c:if test="${not empty successMsg}">
-		<div class="alert alert-success" role="alert">
-		  ${successMsg}
-		</div>
+		<div class="alert alert-success" role="alert">${successMsg}</div>
 	</c:if>
 
 	<div class="table-responsive">
-		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		<table class="table table-bordered" id="dataTable">
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Descrição</th>
+					<th>Descricao</th>
 					<th>Caracteristicas</th>
-					<th>Valor página</th>
-					<th>Valor lauda</th>
-					<th>Valor palavra</th>
-					<th></th>
+
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="servico" items="${listAll}" varStatus="id" method="get">
+				<c:forEach var="servico" items="${servicos}" varStatus="id">
 					<tr>
 						<td>${servico.id}</td>
 						<td>${servico.descricao}</td>
 						<td>${servico.caracteristicas}</td>
-						<td>${servico.valores.pagina}</td>
-						<td>${servico.valores.lauda}</td>
-						<td>${servico.valores.palavra}</td>
-						
-						<td style="text-align: center;">
-							<button onClick=" removerServico()" type="button">
-							</button>
-							
-							<button type="submit" class="btn btn-default">Salvar</button>
-        
-						</td>
 					</tr>
 				</c:forEach>
+
 			</tbody>
 		</table>
 	</div>
+	<button type="submit" class="btn btn-default" onclick="redirecionar()">Alterar
+		Servicos</button>
 </div>
+<script>
+function redirecionar(){
+	window.location.href = "http://localhost:8080/RevisaoTextual-PROI/area-restrita-admin/alterar-servico.jsp";
 
+}
+</script>
 
 <%@ include file="../includes/footer.jsp"%>

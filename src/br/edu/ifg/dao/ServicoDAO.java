@@ -103,14 +103,13 @@ public class ServicoDAO {
 	*@param servico objeto com os novos dados
 	*/
 	public void alterarServico(Servico servico) {
-		String sql = "UPDATE servico SET descricao = ?, caracteristicas = ?, servicoValores= ? WHERE id = ?";
+		String sql = "UPDATE servico SET descricao = ?, caracteristicas = ? WHERE id = ?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, servico.getDescricao());
-			stmt.setString(2, servico.getCaracteristicas());
-			// stmt.setDouble(3, servico.getServicoValores());
-			stmt.setInt(4, servico.getId());
+			stmt.setString(2, servico.getCaracteristicas());		
+			stmt.setInt(3, servico.getId());
 
 			
 			stmt.execute();
@@ -136,19 +135,16 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
 	/*Persiste um novo serviço e seus valores na base de dados
 	*@param servico objeto que contém os dados a serem inseridos
 	*/
 	public void adicionaServico(Servico servico) {
-		String sql = "INSERT INTO servico (descricao, caracteristicas, servicoValores) values (?,?,?,?)";
+		String sql = "INSERT INTO servico (descricao, caracteristicas) values (?,?)";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, servico.getDescricao());
 			stmt.setString(2, servico.getCaracteristicas());
-			// stmt.setString(3, servico.getServicoValores());
-			// stmt.setString(5, servico.getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -156,22 +152,4 @@ public class ServicoDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	/*Persiste um serviço na base de dados
-	*@param servico contem os dados para persistencia
-	*/
-	public void salvarServico(Servico servico){
-	String sql = "INSERT INTO servico (descricao, caracteristicas) values (?,?)";
-
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, servico.getDescricao());
-			stmt.setString(2, servico.getCaracteristicas());
-			
-			stmt.execute();
-			stmt.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-}
 }

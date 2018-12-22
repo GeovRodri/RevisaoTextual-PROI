@@ -18,8 +18,10 @@ public class ServicoValor {
 		this.valor = valor;
 	}
 	//Sobrecarga de construtor
-	public ServicoValor() {
+	public ServicoValor(String formaPagamento, Double valor) {
 		super();
+		this.formaPagamento = CobrancaEnum.lookup(formaPagamento);
+		this.valor = valor;
 	}
 	
 	//Getters e Setters

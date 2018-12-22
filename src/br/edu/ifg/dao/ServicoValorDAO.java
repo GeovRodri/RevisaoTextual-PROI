@@ -12,23 +12,23 @@ public class ServicoValorDAO {
 
 
 	private Connection connection;
-	//cria conex√£o com a base de dados
+	//cria conex„o com a base de dados
 	public ServicoValorDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
 
 	/*Remove os valores de servico da base pelo id
-	*@param id identificador do servi√ßo
+	*@param id identificador do serviÁo
 	*/
 	public void removerValorServico(Integer id){
 		
-		String sql = "DELETE servicoValores FROM servico WHERE idServico = '?'";
-		//cria√ß√£o do comando SQL a ser executado no banco
+		String sql = "DELETE FROM servico_valor WHERE id_servico = ?";
+		//criaÁ„o do comando SQL a ser executado no banco
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			stmt.setInt(1, id);//insere no SQL o id do servico alvo
-			stmt.execute();//execu√ß√£o do comando SQL
+			stmt.execute();//execuÁ„o do comando SQL
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -36,7 +36,7 @@ public class ServicoValorDAO {
 	}
 
 	
-	/* Adicina os valores de um servi√ßo a base
+	/* Adicina os valores de um serviÁo a base
 	*@param valor objeto contendo os valores
 	*/
 	public void adicionaServicoValor(ServicoValor valor) {
@@ -47,6 +47,23 @@ public class ServicoValorDAO {
 			//adiciona ao comando os valores a serem inseridos na base
 			stmt.setString(1, valor.getFormaPagamento().getId());
 			stmt.setDouble(2, valor.getValor());
+			stmt.setInt(3, valor.getIdServico());
+			
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public void alterarServicoValor(ServicoValor valor) {
+		String sql = "UPDATE servico_valor SET valor = ?  WHERE forma_pagamento = ? AND id_servico = ?";
+		
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			//adiciona ao comando os valores a serem inseridos na base
+			
+			stmt.setDouble(1, valor.getValor());
+			stmt.setString(2, valor.getFormaPagamento().getId());
 			stmt.setInt(3, valor.getIdServico());
 			
 			stmt.execute();
